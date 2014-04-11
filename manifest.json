@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "Time sheet update",
+  "description": "This extension reminds user to update timesheet.",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["http://www.google.com/*"],
+      "css": [],
+      "js": ["myscript.js"]
+    }
+  ],
+  "permissions": [
+    "https://secure.flickr.com/",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "timesheet_icon.png",
+    "default_popup": "popup.html"
+  }
+}
