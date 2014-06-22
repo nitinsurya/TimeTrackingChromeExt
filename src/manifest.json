@@ -3,19 +3,22 @@
 
   "name": "Time sheet update",
   "description": "This extension reminds user to update timesheet.",
-  "version": "1.0",
+  "version": "2.0",
   "content_scripts": [
     {
-      "matches": ["http://www.google.com/*"],
-      "css": [],
-      "js": ["myscript.js"]
+      "matches": ["https://*/*","https://*/*"],
+      "css": ["css/default.css"],
+      "js": [
+        "js/jquery.js",
+        "myscript.js",
+        "popup.js"
+      ]
     }
   ],
   "permissions": [
     "storage"
   ],
   "browser_action": {
-    "default_icon": "timesheet_icon.png",
-    "default_popup": "popup.html"
+    "default_icon": "timesheet_icon.png"
   }
 }

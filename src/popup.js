@@ -1,5 +1,8 @@
 var timesheetText = 'timesheet';
 var timesheetTmpData = {'value' : {}};
+var PopuUpDivID = "tt_popup_div_id";
+var htmlTTClass = "time_tracker_sidebar";
+
 // contains all the functions and contents required for setting the details of the timesheet
 var timeSheetDetails = {
 
@@ -82,8 +85,35 @@ function clearDataInView(){
  element.setAttribute('class','');
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById("add_details_button").onclick = timeSheetDetails.addDetails;
-  document.getElementById("clear_all_button").onclick = timeSheetDetails.clearDetails;
-  document.getElementById("get_all_details").onclick = timeSheetDetails.getDetails;
-});
+function toggleSidebar(){
+  if($("html").hasClass(htmlTTClass)){
+    $("html").removeClass(htmlTTClass);
+    $('#'+PopuUpDivID).addClass('hidden');
+  }else{
+    $("html").addClass(htmlTTClass);
+    $('#'+PopuUpDivID).removeClass('hidden');
+  }
+}
+
+function setup_view(){
+  var div_contents = $("<div id='" + PopuUpDivID + "' class='hidden'><div id='view_details_div'></div><div class='details_options'>\
+      <span class='task_span'>Task:</span> <input type='text' name='task' id='task_done' /><br />\
+      <span class='duration_span'>Duration:</span> <input type='text' name='taskDur' id='task_duration' />\
+    </div>\
+    <div class='buttons'>\
+      <input type='button' value='Add' id='add_details_button' />\
+      <input type='button' value='Clear All' id='clear_all_button' />\
+      <input type='button' value='View All Data' id='get_all_details' />\
+    </div></div>");
+  var toggler = $('<div class="tt_toggle">&#9776;</div>');
+  $('body').append(div_contents).append(toggler);
+}
+
+$(document).ready(function() {
+    setup_view();
+    $('.tt_toggle').on('click',toggleSidebar);
+    document.getElementById("add_details_button").onclick = timeSheetDetails.addDetails;
+    document.getElementById("clear_all_button").onclick = timeSheetDetails.clearDetails;
+    document.getElementById("get_all_details").onclick = timeSheetDetails.getDetails;
+    // $('html').addClass('timetracker');  
+})
